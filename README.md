@@ -32,74 +32,69 @@ These weights in the summation are coefficients we obtain upon simulation in MAT
 
 # VERILOG CODE FOR FIR_FILTER:-
 
+     module fir_filter(clk, reset, data_in, data_out);
 
-     module fir(
-     input clk,
-     input signed [15:0] noisy_signal,
-     output signed [15:0] filtered_signal
-    );
-   
-    integer i,j;
-    reg signed [15:0] coeff [0:8]={16'h 04f6,
-                                16'h 0AE4,
-                                16'h 1089,
-                                16'h 1496,
-                                16'h 160F,
-                                16'h 1496,
-                                16'h 1089,
-                                16'h 0AE4,
-                                16'h 04F6 };
-    reg signed [15:0] delayed_signal [0:8];
-    reg signed [31:0] prod [0:8];                             
-    reg signed [32:0] sum_0 [0:4];
-    reg signed [33:0] sum_1 [0:2];
-    reg signed [34:0] sum_2 [0:1];
-    reg signed [35:0] sum_3;  
-  
-    always @(posedge clk)
+     parameter N = 16;
+
+     input clk, reset;
+     input signed [N-1:0] data_in;
+     output reg signed  [N-1:0] data_out; 
+
+     // coefficients defination
+     // 0.25 x 128(scaling factor) = 32 = 6'b100000
+        wire [5:0] b0 =  6'b000000; 
+        wire [5:0] b1 =  6'b000001; 
+        wire [5:0] b2 =  6'b000111; 
+        wire [5:0] b3 =  6'b001111;
+        wire [5:0] b4 =  6'b010011; 
+        wire [5:0] b5 =  6'b001111; 
+        wire [5:0] b6 =  6'b000111; 
+        wire [5:0] b7 =  6'b000001;
+        wire [5:0] b8 =  6'b000000; 
+        wire [N-1:0] x1, x2, x3, x4,x5,x6,x7, x8; 
+
+     // Create delays i.e x[n-1], x[n-2], .. x[n-N]
+     // Instantiate D Flip Flops
+     DFF DFF0(clk, 0, data_in, x1); // x[n-1]
+      DFF DFF1(clk, 0, x1, x2);      // [x[n-2]]
+      DFF DFF2(clk, 0, x2, x3); 
+      DFF DFF3(clk, 0, x3,x4); // x[n-1]
+      DFF DFF4(clk, 0, x4,x5);      // [x[n-2]]
+      DFF DFF5(clk, 0,x5,x6);
+     DFF DFF6(clk, 0, x6,x7); // x[n-1]
+      DFF DFF7(clk, 0, x7,x8);
+
+    //  Multiplication
+     wire [N-1:0] Mul0, Mul1, Mul2, Mul3,Mul4, Mul5, Mul6, Mul7, Mul8;  
+     assign Mul0 = b0; 
+     assign Mul1 = data_in * b1;  
+     assign Mul2 = x1 * b2;  
+     assign Mul3 = x2 * b3;  
+     assign Mul4 = x3 * b4;  
+     assign Mul5 = x4 * b5;  
+     assign Mul6 = x5 * b6;  
+     assign Mul7 = x6 * b7;
+     assign Mul8 = x7 * b8; 
+ 
+    wire [N-1:0] Add_final; // Addition operation
+     assign Add_final = Mul0 + Mul1 + Mul2 + Mul3+Mul4+ Mul5+ Mul6+ Mul7+Mul8; 
+    always@(posedge clk) data_out <= Add_final; // Final calculation to output 
+
+    endmodule
+
+     module DFF(clk, reset, data_in, data_delayed);
+     parameter N = 16;
+     input clk, reset;   input [N-1:0] data_in;
+     output reg [N-1:0] data_delayed; 
+ 
+    always@(posedge clk)
     begin
-     delayed_signal[0]=noisy_signal;
-      for(i=1; i<=8; i=i+1) begin
-     delayed_signal[i] <= delayed_signal[i+1];
-      end 
-     end 
-    
-    always @(posedge clk)
-    begin
-       for(j=0; j<=8; j=j+1) begin
-        prod[j] <= delayed_signal[j] * coeff[j];
-        end                         
-      end
-      
-       always @(posedge clk)
-       begin
-          sum_0[0] <= prod[0] + prod[1];
-          sum_0[1] <= prod[2] + prod[3];
-          sum_0[2] <= prod[4] + prod[5];
-          sum_0[3] <= prod[6] + prod[7];
-          sum_0[4] <= prod[8];
-        end  
-       always @(posedge clk)
-       begin
-         sum_1[0] <= sum_0[0] + sum_0[1];
-         sum_1[1] <= sum_0[2] + sum_0[3];  
-         sum_1[2] <= sum_0[4]; 
-        end    
-        
-        always @(posedge clk)
-       begin
-         sum_2[0] <= sum_1[0] +sum_1[1];
-         sum_2[1] <= sum_1[2];
-        end 
-       
-       always @(posedge clk)
-       begin
-         sum_3 <= sum_2[0] + sum_2[1];
-        end 
-        
-       assign filtered_signal = $signed (sum_3[35:14]);
-       
-       endmodule 
+    if (reset)
+    data_delayed <= 0;
+    else
+    data_delayed <= data_in;    
+    end
+    endmodule
 
 
 
