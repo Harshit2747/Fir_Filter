@@ -200,6 +200,7 @@ b). Sine wave generated in MATLAB before addition of noise:-
 c). Sine wave generated in MATLAB after addition of noise.
 
 
+![Screenshot (133) 1](https://github.com/Harshit2747/Fir_Filter/assets/167745025/07dd7bc0-1737-4d74-a8a9-0f6f3c873cd2)
 
 
 
