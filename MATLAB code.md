@@ -1,5 +1,6 @@
 % Generate a sine wave
 
+
 close all; clear all;
 
 fs = 5;
@@ -23,7 +24,13 @@ title('\bf Sine wave');
 
 
 
+
+
+
+
 % Add a noise
+
+
 
 a = 0.1; % upper limit
 
@@ -42,6 +49,10 @@ xlabel('\bf Time');
 ylabel('\bf Amplitude');
 
 title('\bf Sine wave + Noise');
+
+
+
+
 
 
 
@@ -67,7 +78,13 @@ title('\bf Sine wave + Noise : Scaled Signal');
 
 
 
+
+
+
+
 % Convert from integers to binary
+
+
 
 sine_noise_in_binary_signed = dec2bin(mod((sine_noise_integers),2^total_wordlength),total_wordlength);
 
