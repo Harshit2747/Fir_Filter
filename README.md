@@ -9,6 +9,20 @@ An FIR filter is a type of digital filter that has a finite duration of response
 Verilog Implementation: Suitable for hardware design and FPGA implementation.
 MATLAB Implementation: Ideal for simulation and verification of filter characteristics.
 
+
+# THEORITICAL STUDY:-
+
+Finite Impulse Response Filter has exact linear phase, highly stable, computationally intensive, less-sensitive to finite word-length effects, arbitrary amplitude-frequency characteristic and real-time stable signal processing requirements etc. Thus, it is widely used in different digital signal processing applications.
+
+We know, a finite impulse response (FIR) filter is a filter whose impulse response or response to any finite length input is of finite duration, because it settles to zero in finite time. This is however in contrast to infinite impulse response (IIR) filters, which may have internal feedback and may continue to respond indefinitely (mostly decaying). 
+
+The impulse response of an Nth order discrete- time FIR filter works for exactly N + 1 times, from the zeroth time to the Nth time in the time domain.
+
+For output of an FIR filter of order N , each output of the sequence is the weighted sum of most of the recent N input values. 
+
+These weights in the summation are coefficients we obtain upon simulation in MATLAB special toolbox FDATool by method of window function, we use Hamming window for the filter design.
+
+
 # PRACTICAL STUDY:
 
 • This Verilog module implements a simple FIR filter with order 8. The data_in input represents the input sample to be filtered, and data_out represents the filtered output. The b0-b8 parameter defines the filter coefficients generated in MATLAB XDAtool, the Filter Generator, and the x1-x8 variables store the input samples.
