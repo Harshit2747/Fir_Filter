@@ -186,6 +186,7 @@ a). Binary input generated in MATLAB to use it as an input in verilog code.
       0000000000000010 
 
 
+
  
 
 
@@ -195,12 +196,18 @@ b). Sine wave generated in MATLAB before addition of noise:-
 
 
 
+![Screenshot (134) 1](https://github.com/Harshit2747/Fir_Filter/assets/167745025/3331c93f-5dee-46e4-8a40-f89f97894b71)
+
+
+
 
 
 c). Sine wave generated in MATLAB after addition of noise.
 
 
+
 ![Screenshot (133) 1](https://github.com/Harshit2747/Fir_Filter/assets/167745025/07dd7bc0-1737-4d74-a8a9-0f6f3c873cd2)
+
 
 
 
