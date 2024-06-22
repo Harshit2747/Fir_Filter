@@ -30,6 +30,26 @@ These weights in the summation are coefficients we obtain upon simulation in MAT
 • The filter operation is performed by multiplying each input sample in the variable list  with its corresponding coefficient and accumulating the results to produce the output sample. The clk input is used for clocking and reset input is for resetting the filter. The DFF  is a module of D Flip- Flop which is useful for us to create time-delay.
 
 
+# VERILOG CODE FOR FIR_FILTER:-
+
+
+
+
+
+
+
+
+
+
+# MATLAB CODE:-
+
+
+
+
+
+
+
+
 # MATLAB SIGNAL GENERATED:-
 
 a). Binary input generated in MATLAB to use it as an input in verilog code.
