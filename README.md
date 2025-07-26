@@ -9,6 +9,22 @@ An FIR filter is a type of digital filter that has a finite duration of response
 Verilog Implementation: Suitable for hardware design and FPGA implementation.
 MATLAB Implementation: Ideal for simulation and verification of filter characteristics.
 
+# Purpose of this project 
+
+The goal of this project is to design and implement a 9-tap FIR filter using Verilog for hardware and MATLAB for simulation. This filter acts as a weighted moving average, commonly used in digital signal processing to:
+
+. Remove high-frequency noise
+
+. Smooth real-time data signals
+
+. Demonstrate FIR filter behavior in hardware and simulation
+
+. Bridge theoretical DSP concepts with practical HDL design
+
+. This project showcases how digital filters can be implemented and verified across both FPGA hardware and software simulation platforms.
+
+
+
 
 # THEORITICAL STUDY:-
 
