@@ -1,6 +1,6 @@
 # Fir_Filter
 
-This project demonstrates the design and implementation of a Finite Impulse Response (FIR) filter using both Verilog and MATLAB. The FIR filter is a type of digital filter used in various signal processing applications due to its linear phase response and stability.Digital filtering perform mathematical operation on sampled,discrete-time signal with the purpose of attenuating or enhancing parts of the signal.
+This project demonstrates the implementation of a 3rd-order moving average filter using both Verilog (for hardware) and MATLAB (for simulation & verification). A moving average filter is a simple FIR filter used in digital signal processing to remove noise and smooth out signal fluctuations.
 
 # Overview
 
